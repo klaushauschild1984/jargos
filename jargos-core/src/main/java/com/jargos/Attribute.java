@@ -13,40 +13,26 @@
  */
 package com.jargos;
 
-import java.util.Arrays;
-
 /**
- * Represents a line containing text and a number of {@link Attribute attributes}.
+ * Represents a {@link Line lines} attribute containing a key and a value.
  *
  * @since 1.0
  *
  * @author Klaus Hauschild
  */
-class Line {
+public class Attribute {
 
-    private final String text;
-    private final Attribute[] attributes;
+    private final String key;
+    private final String value;
 
-    Line(final String text, Attribute... attributes) {
-        this.text = text;
-        this.attributes = attributes;
+    public Attribute(final String key, final String value) {
+        this.key = key;
+        this.value = value;
     }
 
     @Override
     public String toString() {
-        final StringBuilder lineBuilder = new StringBuilder();
-
-        lineBuilder.append(text);
-
-        if (attributes != null && attributes.length > 0) {
-            lineBuilder.append(" |");
-            Arrays.stream(attributes) //
-                            .forEach(attribute -> {
-                                lineBuilder.append(" ");
-                                lineBuilder.append(attribute);
-                            });
-        }
-
-        return lineBuilder.toString();
+        return String.format("%s=%s", key, value);
     }
+
 }
