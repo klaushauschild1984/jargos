@@ -1,9 +1,25 @@
+/*
+ * Jargos Copyright (C) 2018 Klaus Hauschild
+ *
+ * This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public
+ * License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later
+ * version.
+ *
+ * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along with this program. If not, see
+ * <http://www.gnu.org/licenses/>.
+ */
 package com.jargos;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Arrays;
 import java.util.Base64;
 import java.util.Objects;
@@ -21,7 +37,7 @@ public class Jargos {
                         separator(), //
                         line("Hello world"), //
                         line("Hello world", Display.size(12)), //
-                        line("Hello world", Display.size(24)) //
+                        line("Hello world", Display.size(24), Action.bash("top")) //
         );
 
     }
@@ -135,6 +151,55 @@ public class Jargos {
 
         public static Attribute unescape(final boolean unescape) {
             return Helper.attribute("unescape", unescape);
+        }
+
+    }
+
+    public static class Action {
+
+        public static Attribute bash(final String bash, final Object... parameters) {
+            final StringBuilder bashBuilder = new StringBuilder();
+            bashBuilder.append("'");
+            bashBuilder.append(bash);
+            if (parameters != null && parameters.length > 0) {
+                Arrays.stream(parameters) //
+                                .forEach(parameter -> {
+                                    bashBuilder.append(" ");
+                                    bashBuilder.append(parameter);
+                                });
+            }
+            bashBuilder.append("'");
+            return Helper.attribute("bash", bashBuilder.toString());
+        }
+
+        public static Attribute terminal(final boolean terminal) {
+            return Helper.attribute("terminal", terminal);
+        }
+
+        public static Attribute href(final URL url) {
+            return Helper.attribute("href", url.toString());
+        }
+
+        public static Attribute href(final File file) {
+            return Helper.attribute("href", file.toURI().toString());
+        }
+
+        public static Attribute href(final String url) {
+            try {
+                return href(new URL(url));
+            } catch (final MalformedURLException exception) {
+                Helper.errorMessage(
+                                String.format("Invalid URL '%s': %s", url, exception.getMessage()));
+                throw new RuntimeException(exception);
+            }
+        }
+
+        public static Attribute eval(final String eval) {
+            return Helper.attribute("eval", eval);
+        }
+
+        public static Attribute refresh(final boolean refresh) {
+            return Helper.attribute("refresh", refresh);
         }
 
     }
