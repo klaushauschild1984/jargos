@@ -15,6 +15,13 @@ package com.jargos;
 
 import java.util.Arrays;
 
+/**
+ * Represents a line containing text and a number of {@link Attribute attributes}.
+ *
+ * @since 1.0
+ *
+ * @author Klaus Hauschild
+ */
 class Line {
 
     private final String text;

@@ -13,6 +13,13 @@
  */
 package com.jargos;
 
+/**
+ * A special line interpreted as separator. The first separator separates button lines and content lines.
+ *
+ * @since 1.0
+ *
+ * @author Klaus Hauschild
+ */
 class Separator extends Line {
 
     Separator() {

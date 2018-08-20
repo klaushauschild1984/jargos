@@ -25,6 +25,13 @@ import java.util.Base64;
 import java.util.Objects;
 import javax.imageio.ImageIO;
 
+/**
+ * The Java Argos API wrapper.
+ *
+ * @since 1.0
+ *
+ * @author Klaus Hauschild
+ */
 public class Jargos {
 
     private static final String ARGOS_VERSION = "ARGOS_VERSION";

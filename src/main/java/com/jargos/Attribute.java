@@ -13,6 +13,13 @@
  */
 package com.jargos;
 
+/**
+ * Represents a {@link Line lines} attribute containing a key and a value.
+ *
+ * @since 1.0
+ *
+ * @author Klaus Hauschild
+ */
 class Attribute {
 
     private final String key;
