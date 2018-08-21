@@ -17,7 +17,6 @@
                 <inherited>true</inherited>
                 <executions>
                     <execution>
-                        <id>make-assembly</id>
                         <phase>package</phase>
                         <goals>
                             <goal>single</goal>
@@ -36,6 +35,27 @@
                         </configuration>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.6.0</version>
+                <inherited>true</inherited>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>java</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <mainClass>com.jargos.bash.Script</mainClass>
+                    <arguments>
+                        <argument>${project.build.directory}/jargos</argument>
+                        <argument>${jargos.finalName}</argument>
+                    </arguments>
+                </configuration>
             </plugin>
         </plugins>
     </build>
