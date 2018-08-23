@@ -22,8 +22,16 @@ package com.jargos;
  */
 public class ErrorAttribute extends Attribute {
 
+    private final String message;
+
     public ErrorAttribute(final String message) {
-        super(null, message);
+        super(null, null);
+        this.message = message;
+    }
+
+    @Override
+    public String toString() {
+        return message;
     }
 
 }

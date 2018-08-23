@@ -42,7 +42,7 @@ public class Line {
             lineBuilder.append(" |");
             for (final Attribute attribute : attributes) {
                 if (attribute instanceof ErrorAttribute) {
-                    return new ErrorLine(attribute.getValue()).toString();
+                    return new ErrorLine((ErrorAttribute) attribute).toString();
                 }
                 lineBuilder.append(" ");
                 lineBuilder.append(attribute);

@@ -28,4 +28,8 @@ public class ErrorLine extends Line {
         super(message, color("red"));
     }
 
+    public ErrorLine(final ErrorAttribute errorAttribute) {
+        this(errorAttribute.toString());
+    }
+
 }
