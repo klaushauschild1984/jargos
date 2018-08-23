@@ -30,6 +30,10 @@ public class Attribute {
         this.value = value;
     }
 
+    public String getValue() {
+        return value;
+    }
+
     @Override
     public String toString() {
         return String.format("%s=%s", key, value);

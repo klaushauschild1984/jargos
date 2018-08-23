@@ -11,29 +11,19 @@
  * You should have received a copy of the GNU General Public License along with this program. If not, see
  * <http://www.gnu.org/licenses/>.
  */
-package com.jargos.sample;
-
-import static com.jargos.Jargos.line;
-import static com.jargos.Jargos.lines;
-import static com.jargos.Jargos.separator;
-import static com.jargos.Jargos.Action.href;
+package com.jargos;
 
 /**
+ * Special {@link Attribute} that replaces an erroneous attribute.
+ *
  * @since 1.0
  *
  * @author Klaus Hauschild
  */
-public class JargosSample {
+public class ErrorAttribute extends Attribute {
 
-    public static void main(final String[] args) {
-        lines( //
-                        line("Jargos"), //
-                        separator(), //
-                        line("Google", //
-                                        href("http://www.google.de")), //
-                        line("Foobar", //
-                                        href("foobar")) //
-        );
+    public ErrorAttribute(final String message) {
+        super(null, message);
     }
 
 }

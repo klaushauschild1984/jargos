@@ -13,8 +13,6 @@
  */
 package com.jargos;
 
-import java.util.Arrays;
-
 /**
  * Represents a line containing text and a number of {@link Attribute attributes}.
  *
@@ -29,6 +27,8 @@ public class Line {
 
     Line(final String text, Attribute... attributes) {
         this.text = text;
+        // TODO filter for ErrorAttribute
+        // TODO filter duplicate attributes, maybe warn
         this.attributes = attributes;
     }
 
@@ -40,11 +40,13 @@ public class Line {
 
         if (attributes != null && attributes.length > 0) {
             lineBuilder.append(" |");
-            Arrays.stream(attributes) //
-                            .forEach(attribute -> {
-                                lineBuilder.append(" ");
-                                lineBuilder.append(attribute);
-                            });
+            for (final Attribute attribute : attributes) {
+                if (attribute instanceof ErrorAttribute) {
+                    return new ErrorLine(attribute.getValue()).toString();
+                }
+                lineBuilder.append(" ");
+                lineBuilder.append(attribute);
+            }
         }
 
         return lineBuilder.toString();

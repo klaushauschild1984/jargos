@@ -59,8 +59,8 @@ public class Jargos {
         }
         final String argosVersion = System.getenv(ARGOS_VERSION);
         if (!Objects.equals(argosVersion, ARGOS_TARGET_VERSION)) {
-            Helper.errorMessage(String.format("Jargos might be incompatible with Argos version %s",
-                            argosVersion));
+            System.out.println(new ErrorLine(String.format(
+                            "Jargos might be incompatible with Argos version %s", argosVersion)));
         }
         Arrays.stream(lines) //
                         .forEach(System.out::println);
@@ -114,9 +114,8 @@ public class Jargos {
                                 Base64.getEncoder().encodeToString(imageStream.toByteArray());
                 return Helper.attribute(attribute, encodedImage);
             } catch (final IOException exception) {
-                Helper.errorMessage(
+                return new ErrorAttribute(
                                 String.format("Error encoding image: %s", exception.getMessage()));
-                throw new RuntimeException(exception);
             }
         }
 
@@ -195,9 +194,8 @@ public class Jargos {
             try {
                 return href(new URL(url));
             } catch (final MalformedURLException exception) {
-                Helper.errorMessage(
+                return new ErrorAttribute(
                                 String.format("Invalid URL '%s': %s", url, exception.getMessage()));
-                throw new RuntimeException(exception);
             }
         }
 
@@ -223,10 +221,6 @@ public class Jargos {
 
         private static Attribute attribute(final String attribute, final boolean value) {
             return attribute(attribute, Boolean.toString(value));
-        }
-
-        private static void errorMessage(final String message) {
-            System.out.println(line(message, Display.color("red")));
         }
 
     }
